@@ -39,10 +39,11 @@ public class RequestHandler implements Runnable {
             }
 
             // 라우터를 통해 응답 생성
-            HttpResponse response = router.route(method, path, body.toString());
+            String response = router.route(method, path, body.toString());
+            HttpResponse httpResponse = new HttpResponse(200, "success", response);
 
             // 응답 전송
-            out.print(response.toString());
+            out.print(httpResponse);
             out.flush();
 
             // 클라이언트 소켓 닫기

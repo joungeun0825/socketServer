@@ -10,17 +10,19 @@ public class HttpServer {
     private final int port;
     private final ExecutorService threadPool;
     private final HttpRouter router;
+    private final OrderListController orderListController;
 
     public HttpServer(int port, int threadPoolSize) {
         this.port = port;
         this.threadPool = Executors.newFixedThreadPool(threadPoolSize);
         this.router = new HttpRouter();
+        this.orderListController = new OrderListController();
         configureRoutes();
     }
 
     private void configureRoutes() {
-        router.addGetRoute("/api/orderList", body -> new HttpResponse(200, "OK", "<h1>Current Time: " + System.currentTimeMillis() + "</h1>"));
-        router.addPostRoute("/api/orderList/save", body -> new HttpResponse(200, "OK", "<h1>Echo: " + body + "</h1>"));
+        router.addGetRoute("/api/orderList", body -> orderListController.getOrderList());
+        router.addPostRoute("/api/orderList/save", body -> orderListController.getOrderList());
     }
 
     public void start() {
