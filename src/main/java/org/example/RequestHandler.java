@@ -1,6 +1,11 @@
 package org.example;
+import org.example.config.HttpRouter;
+import org.example.dto.HttpResponse;
+import org.example.dto.MappingDto;
+
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.util.StringTokenizer;
 
 public class RequestHandler implements Runnable {
@@ -39,15 +44,14 @@ public class RequestHandler implements Runnable {
             }
 
             // 라우터를 통해 응답 생성
-            String response = router.route(method, path, body.toString());
+            MappingDto response = router.route(method, path, body.toString());
             HttpResponse httpResponse = new HttpResponse(200, "success", response);
 
-            // 응답 전송
-            out.print(httpResponse);
+            // OutputStream을 사용하여 바이트 배열 출력
+            OutputStream outputStream = clientSocket.getOutputStream();
+            outputStream.write(httpResponse.getResponseBytes());
             out.flush();
-
-            // 클라이언트 소켓 닫기
-            clientSocket.close();
+            clientSocket.close(); // 소켓 종료
         } catch (IOException e) {
             e.printStackTrace();
         }
