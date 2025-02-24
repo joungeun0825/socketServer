@@ -7,7 +7,7 @@ import java.sql.Connection;
 public class Main {
     public static void main(String[] args) {
         Connection connection = DatabaseConfig.connect();
-        HttpServer httpServer = new HttpServer(8080, 3, connection);
+        HttpServer httpServer = new HttpServer(8080, 1, connection);
         httpServer.start();
 
     }
