@@ -1,6 +1,7 @@
-package org.example.dto;
+package org.example.config.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.dto.MappingDto;
 
 import java.nio.charset.StandardCharsets;
 

@@ -1,11 +1,10 @@
 package org.example;
 import org.example.config.HttpRouter;
-import org.example.dto.HttpResponse;
+import org.example.config.dto.HttpResponse;
 import org.example.dto.MappingDto;
 
 import java.io.*;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
 import java.util.StringTokenizer;
 
 public class RequestHandler implements Runnable {

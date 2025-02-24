@@ -8,6 +8,7 @@ import java.util.List;
 
 public class CookieUtil {
     public static String extractCookie(String responseHeaders) {
+
         List<String> cookies = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new StringReader(responseHeaders))) {
